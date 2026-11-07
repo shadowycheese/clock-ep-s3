@@ -1,0 +1,27 @@
+dependencies:
+  antunesls/despi_c02_driver:
+    component_hash: 61e4e25064fa78bf1a5f4498056637fcb8664ae476f3da976a35d2a65f4151be
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32s2
+    - esp32s3
+    - esp32c3
+    - esp32c6
+    version: 0.0.2
+  idf:
+    source:
+      type: idf
+    version: 5.5.4
+direct_dependencies:
+- antunesls/despi_c02_driver
+- idf
+manifest_hash: e74eb470627e093e4a0c3e462b74a8105e76c59c66d0300a172bb7a85c51abcc
+target: esp32s3
+version: 2.0.0

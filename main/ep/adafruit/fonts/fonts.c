@@ -1,0 +1,7 @@
+#include "ep/adafruit/gfxfont.h"
+#include "ep/adafruit/fonts/montserrat_bold_12pt.h"
+#include "ep/adafruit/fonts/montserrat_bold_30pt.h"
+#include "ep/adafruit/fonts/montserrat_bold_70pt.h"
+#include "ep/adafruit/fonts/montserrat_regular_12pt.h"
+#include "ep/adafruit/fonts/montserrat_regular_30pt.h"
+#include "ep/adafruit/fonts/montserrat_regular_48pt.h"

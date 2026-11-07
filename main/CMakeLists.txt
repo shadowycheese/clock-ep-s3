@@ -1,0 +1,23 @@
+idf_component_register(SRCS 
+                        "main.cpp"
+                        "io/espio.c"
+                        "ep/ep.cpp"
+                        "ep/adafruit/Adafruit_GFX.cpp"
+                        "ep/adafruit/fonts/fonts.c"
+                        "net/network.cpp"
+                       INCLUDE_DIRS 
+                        "."
+                        "ep"
+                        "ep/adafruit"
+                        "ep/adafruit/fonts"
+                        "io"
+                        "net"
+                       PRIV_REQUIRES
+                        esp_wifi 
+                        esp_netif 
+                        esp_event 
+                       REQUIRES 
+                        driver
+                        nvs_flash
+                        esp_timer
+                        esp_lcd)
