@@ -5,6 +5,7 @@ idf_component_register(SRCS
                         "ep/adafruit/Adafruit_GFX.cpp"
                         "ep/adafruit/fonts/fonts.c"
                         "net/network.cpp"
+                        "rtc/ds3231.c"
                        INCLUDE_DIRS 
                         "."
                         "ep"
@@ -12,6 +13,7 @@ idf_component_register(SRCS
                         "ep/adafruit/fonts"
                         "io"
                         "net"
+                        "rtc"
                        PRIV_REQUIRES
                         esp_wifi 
                         esp_netif 
@@ -19,5 +21,6 @@ idf_component_register(SRCS
                        REQUIRES 
                         driver
                         nvs_flash
+                        esp_adc
                         esp_timer
                         esp_lcd)

@@ -20,6 +20,8 @@ extern const GFXfont Montserrat_Regular48pt7b;
 
 #define local_time() ((time_t)(time(NULL) + TIME_ZONE_OFFSET))
 
+extern "C" esp_err_t ensure_success(esp_err_t err);
+
 class EPaper : public GFXcanvas1
 {
 public:
@@ -36,7 +38,7 @@ public:
         memset(buffer, 0xFF, _buffer_size);
 
         ESP_LOGI(TAG, "Initializing SPI for EPD...");
-        esp_err_t ret = epd_spi_init();
+        esp_err_t ret = ensure_success(epd_spi_init());
         if (ret != ESP_OK)
         {
             ESP_LOGE(TAG, "Failed to initialize SPI bus");
@@ -51,7 +53,7 @@ public:
         epd_sleep();
     }
 
-    void update(float battery_level, int32_t sync_hour)
+    void update(bool use_ds3231, int32_t sync_hour)
     {
         memset(buffer, 0xFF, _buffer_size);
         setTextColor(0);
@@ -91,7 +93,7 @@ public:
         setFont(&Montserrat_Bold70pt7b);
         printf("%s", mm);
 
-        snprintf(bat, 20, "Batt: %0.2fV", battery_level);
+        snprintf(bat, 20, "RTC: %s", use_ds3231 ? "OK" : "ERR");
         sw = string_width(bat, &Montserrat_Regular12pt7b);
         setCursor(400 - (sw + 4), 290);
         setFont(&Montserrat_Regular12pt7b);
@@ -142,9 +144,9 @@ public:
 
     void sleep()
     {
-        epd_sleep();
-
         ESP_LOGI(TAG, "Display sleeping");
+
+        ensure_success(epd_sleep());
     }
 
     virtual void drawPixel(int16_t x, int16_t y, uint16_t color)
@@ -154,8 +156,10 @@ public:
 
     void commit()
     {
-        epd_init_fast();
-        epd_display_fast(buffer);
+        ensure_success(epd_init_fast());
+        ensure_success(epd_display_fast(buffer));
+
+        ESP_LOGI(TAG, "Commit complete");
     }
 
 private:
